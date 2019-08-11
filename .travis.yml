@@ -19,6 +19,23 @@ install:
 script:
   - yarn lint
   - yarn build
+  - zip -r $TRAVIS_COMMIT . -x 'node_modules/*' -x '.git/*'
+  - mkdir -p build
+  - mv $TRAVIS_COMMIT.zip build/travis-$TRAVIS_COMMIT.zip
   - yarn start &
   - sleep 5
   - yarn test
+
+deploy:
+  - provider: elasticbeanstalk
+    access_key_id: "$AWS_ACCESS_KEY_ID"
+    secret_access_key: "$AWS_SECRET_ACCESS_KEY"
+    region: "$AWS_REGION"
+    app: "$AWS_APPLICATION_NAME"
+    env: "$AWS_APPLICATION_ENV"
+    bucket_name: "$AWS_S3_BUCKET"
+    skip_cleanup: true
+    zip_file: "build/travis-$TRAVIS_COMMIT.zip"
+    bucket_path: "app.okpock.com"
+    on:
+      branch: master
