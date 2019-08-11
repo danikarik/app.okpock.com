@@ -1,38 +1,39 @@
 <script>
-    import { goto, stores } from '@sapper/app';
+    import { stores } from '@sapper/app';
     const { session } = stores();
 
-    let username = '';
-    let password = '';
+    let email = '';
 
+    let data = '';
     let error = '';
 
     async function handleSubmit(event) {
-        const response = await fetch('/api/login', {
+        const response = await fetch('/api/recover', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ username: username, password: password })
+            body: JSON.stringify({ email: email })
         })
         if (response.status === 200) {
-            session.set({ isAuthenticated: true });
-            goto('/account');
+            data = await response.json();
         } else {
             error = await response.json();
         }
     }
 </script>
 
-<h1>{$session.isAuthenticated}</h1>
-
 {#if error}
     <p class="text-red-700">{error.message}</p>
 {/if}
 
+{#if data}
+    <p class="text-green-700">{data.email}</p>
+    <p class="text-green-700">{data.sentAt}</p>
+{/if}
+
 <form on:submit|preventDefault={handleSubmit}>
-    <input type="text" name="username" bind:value={username}>
-    <input type="password" name="password" bind:value={password}>
-    <button type="submit">Login</button>
+    <input type="text" name="email" bind:value={email}>
+    <button type="submit">Recover</button>
 </form>

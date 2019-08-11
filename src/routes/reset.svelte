@@ -1,38 +1,45 @@
+<script context="module">
+	export async function preload(page, session) {
+        const { type, token } = await page.query;
+		return { type, token };
+	}
+</script>
+
 <script>
-    import { goto, stores } from '@sapper/app';
-    const { session } = stores();
+    import { goto } from '@sapper/app';
+    export let type;
+    export let token;
 
-    let username = '';
     let password = '';
-
     let error = '';
 
     async function handleSubmit(event) {
-        const response = await fetch('/api/login', {
+        const response = await fetch('/api/reset', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ username: username, password: password })
+            body: JSON.stringify({ type: type, token: token, password: password })
         })
-        if (response.status === 200) {
-            session.set({ isAuthenticated: true });
-            goto('/account');
+        if (response.status === 202) {
+            goto('/login');
         } else {
             error = await response.json();
         }
     }
 </script>
 
-<h1>{$session.isAuthenticated}</h1>
+<svelte:head>
+	<title>Reset</title>
+</svelte:head>
+
 
 {#if error}
     <p class="text-red-700">{error.message}</p>
 {/if}
 
 <form on:submit|preventDefault={handleSubmit}>
-    <input type="text" name="username" bind:value={username}>
     <input type="password" name="password" bind:value={password}>
-    <button type="submit">Login</button>
+    <button type="submit">Reset</button>
 </form>

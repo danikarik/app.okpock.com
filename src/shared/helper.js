@@ -19,6 +19,10 @@ function sendJson(res, status, data, headers = {}) {
   res.end(JSON.stringify(data));
 }
 
+function newJson(data) {
+  return JSON.parse(JSON.stringify(data));
+}
+
 function withCookie(req) {
   return {
     headers: {
@@ -32,4 +36,4 @@ function apiUrl(path) {
   return API_URL + path;
 }
 
-export { handleError, sendJson, withCookie, apiUrl }
+export { handleError, sendJson, newJson, withCookie, apiUrl }

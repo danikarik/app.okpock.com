@@ -53,13 +53,15 @@
 
 <nav>
 	<ul>
-		<li><a class='{segment === undefined ? "selected" : ""}' href='.'>home</a></li>
-		<li><a class='{segment === "about" ? "selected" : ""}' href='about'>about</a></li>
 		{#if !$session.isAuthenticated}
-			<li><a class='{segment === "login" ? "selected" : ""}' href='login'>login</a></li>
+			<li><a class='{segment === undefined ? "selected" : ""}' href='/'>home</a></li>
+			<li><a class='{segment === "about" ? "selected" : ""}' href='/about'>about</a></li>
+			<li><a class='{segment === "login" ? "selected" : ""}' href='/login'>login</a></li>
+			<li><a class='{segment === "register" ? "selected" : ""}' href='/register'>register</a></li>
+			<li><a class='{segment === "recover" ? "selected" : ""}' href='/recover'>recover</a></li>
 		{:else}
-			<li><a class='{segment === "account" ? "selected" : ""}' href='account'>account</a></li>
-			<li><a class='{segment === "logout" ? "selected" : ""}' href='logout'>logout</a></li>
+			<li><a class='{segment === "account" ? "selected" : ""}' href='/account'>account</a></li>
+			<li><a class='{segment === "logout" ? "selected" : ""}' href='/logout'>logout</a></li>
 		{/if}
 	</ul>
 </nav>

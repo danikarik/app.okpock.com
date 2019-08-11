@@ -2,6 +2,18 @@ import cookieSession from 'cookie-session';
 
 const { SERVER_SECRET, DEBUG } = process.env;
 
+const notAuthenticatedUrls = [
+  '/',
+  '/login',
+  '/register',
+  '/recover',
+  '/reset'
+];
+
+const authenticatedUrls = [
+  '/account'
+];
+
 function isNullOrUndefined(val) {
   if (val === null || val === undefined) {
     return true;
@@ -57,8 +69,13 @@ function csrfMiddleware(req, res, next) {
 
 function redirectMiddleware(req, res, next) {
   if (!isNullOrUndefined(req.session.isAuthenticated)) {
-    if (req.session.isAuthenticated && req.path === '/login') {
+    if (req.session.isAuthenticated && notAuthenticatedUrls.includes(req.path)) {
+      console.log(req.path);
       res.writeHead(301, {'Location': '/account'})
+      res.end();
+    }
+    if (!req.session.isAuthenticated && authenticatedUrls.includes(req.path)) {
+      res.writeHead(301, {'Location': '/login'})
       res.end();
     }
   }
