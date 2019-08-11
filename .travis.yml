@@ -14,7 +14,7 @@ cache:
     - ~/.cache
 
 install:
-  - npm ci
+  - yarn
 
 script:
   - yarn lint
