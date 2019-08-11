@@ -3,12 +3,21 @@ language: node_js
 node_js:
   - "10"
 
+addons:
+  apt:
+    packages:
+      - libgconf-2-4
+
 cache:
   npm: true
   directories:
     - ~/.cache
 
+install:
+  - yarn install --frozen-lockfile
+
 script:
   - yarn lint
-  - yarn test
   - yarn build
+  - yarn start
+  - yarn test
