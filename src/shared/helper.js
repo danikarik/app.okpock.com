@@ -6,7 +6,7 @@ function handleError(res, error) {
     res.writeHead(data.code, applicationJson);
     res.end(JSON.stringify(data));
   } else {
-    res.writeHead(503, applicationJson)
+    res.writeHead(503, applicationJson);
     res.end(JSON.stringify({
       code: 503,
       message: 'Service Unavailable'
@@ -28,7 +28,7 @@ function withCookie(req) {
     headers: {
       'Cookie': req.headers['cookie']
     }
-  }
+  };
 }
 
 function apiUrl(path) {
@@ -36,4 +36,4 @@ function apiUrl(path) {
   return API_URL + path;
 }
 
-export { handleError, sendJson, newJson, withCookie, apiUrl }
+export { handleError, sendJson, newJson, withCookie, apiUrl };

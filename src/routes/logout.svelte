@@ -9,12 +9,12 @@
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
-        })
+        });
         if (response.status === 200) {
             session.set({
                 isAuthenticated: false,
                 user: false
-            })
+            });
             goto('/');
         }
     }

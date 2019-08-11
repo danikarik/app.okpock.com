@@ -23,7 +23,7 @@ function isNullOrUndefined(val) {
 
 function debug() {
   if (!isNullOrUndefined(DEBUG)) {
-    return DEBUG === "true";
+    return DEBUG === 'true';
   }
   return false;
 }
@@ -36,7 +36,7 @@ function cookieMiddleware() {
     maxAge: 6 * 24 * 60 * 60 * 1000, // 6 days
     secure: true,
     httpOnly: true
-  }
+  };
 
   if (debug()) {
     opts.domain = '';
@@ -71,11 +71,11 @@ function redirectMiddleware(req, res, next) {
   if (!isNullOrUndefined(req.session.isAuthenticated)) {
     if (req.session.isAuthenticated && notAuthenticatedUrls.includes(req.path)) {
       console.log(req.path);
-      res.writeHead(301, {'Location': '/account'})
+      res.writeHead(301, {'Location': '/account'});
       res.end();
     }
     if (!req.session.isAuthenticated && authenticatedUrls.includes(req.path)) {
-      res.writeHead(301, {'Location': '/login'})
+      res.writeHead(301, {'Location': '/login'});
       res.end();
     }
   }

@@ -10,7 +10,7 @@
                 'Content-Type': 'application/json'
             },
             credentials: 'include'
-        })
+        });
 
         if (response.status === 200) {
             user = await response.json();
@@ -18,7 +18,7 @@
             error = await response.json();
         }
 
-        return { user, error }
+        return { user, error };
 	}
 </script>
 

@@ -21,7 +21,7 @@
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ type: type, token: token, password: password })
-        })
+        });
         if (response.status === 202) {
             goto('/login');
         } else {

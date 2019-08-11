@@ -1,6 +1,5 @@
 <script>
-    import { goto, stores } from '@sapper/app';
-    const { session } = stores();
+    import { goto } from '@sapper/app';
 
     let username = '';
     let email = '';
@@ -16,7 +15,7 @@
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ username: username, email: email, password: password })
-        })
+        });
         if (response.status === 201) {
             goto('/login');
         } else {

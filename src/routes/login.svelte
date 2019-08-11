@@ -15,7 +15,7 @@
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ username: username, password: password })
-        })
+        });
         if (response.status === 200) {
             session.set({ isAuthenticated: true });
             goto('/account');

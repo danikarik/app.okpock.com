@@ -1,7 +1,4 @@
 <script>
-    import { stores } from '@sapper/app';
-    const { session } = stores();
-
     let email = '';
 
     let data = '';
@@ -15,7 +12,7 @@
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ email: email })
-        })
+        });
         if (response.status === 200) {
             data = await response.json();
         } else {
