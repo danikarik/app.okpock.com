@@ -19,5 +19,6 @@ install:
 script:
   - yarn lint
   - yarn build
-  - yarn start
+  - yarn start &
+  - sleep 5
   - yarn test
