@@ -13,6 +13,9 @@ cache:
   directories:
     - ~/.cache
 
+install:
+  - npm ci
+
 script:
   - yarn lint
   - yarn test
