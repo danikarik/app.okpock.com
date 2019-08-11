@@ -3,7 +3,15 @@ language: node_js
 node_js:
   - "11"
 
-cache: npm
+addons:
+  apt:
+    packages:
+      - libgconf-2-4
+
+cache:
+  npm: true
+  directories:
+    - ~/.cache
 
 script:
   - yarn lint
