@@ -26,7 +26,8 @@ function newJson(data) {
 function withCookie(req) {
   return {
     headers: {
-      'Cookie': req.headers['cookie']
+      'Cookie': req.headers['cookie'],
+      'X-XSRF-TOKEN': req.session.csrfToken
     }
   };
 }

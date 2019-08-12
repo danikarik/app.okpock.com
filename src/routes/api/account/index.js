@@ -1,4 +1,4 @@
-import { handleError, sendJson, newJson, withCookie, apiUrl } from '../../shared/helper';
+import { handleError, sendJson, newJson, withCookie, apiUrl } from '../../../shared/helper';
 const axios = require('axios');
 
 export async function get(req, res, next) {
